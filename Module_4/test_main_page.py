@@ -1,13 +1,10 @@
+from .pages.main_page import MainPage
 from selenium.webdriver.common.by import By
 # Пример того, как работает паттерн.
 
 
 def test_guest_can_go_to_login_page(driver):
     link = "http://selenium1py.pythonanywhere.com/"
-    driver.get(link)
-    go_to_login_page(driver)
-
-
-def go_to_login_page(driver):
-    login_link = driver.find_element(By.CSS_SELECTOR, "#login_link")
-    login_link.click()
+    page = MainPage(driver, link)
+    page.open()
+    page.go_to_login_page()
