@@ -15,3 +15,4 @@ class LoginPageLocators:
 class ProductPageLocators:
     ADD_TO_CART_BUTTON = (By.CLASS_NAME, 'btn-add-to-basket')
     ITEM_ADDED_ALERT = (By.CLASS_NAME, 'alertinner')
+    CURRENT_ITEM_NAME = (By.CSS_SELECTOR, '.product_main > h1')
