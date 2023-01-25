@@ -9,7 +9,7 @@ def pytest_addoption(parser):
                      help="Выберите локаль (на каком языке).")
 
 @pytest.fixture(scope="function")
-def browser(request):
+def driver(request):
     user_language = request.config.getoption("language")
     options_firefox = Options()
     options_firefox.binary_location = '/snap/firefox/2154/usr/lib/firefox/firefox'

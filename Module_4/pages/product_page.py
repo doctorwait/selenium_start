@@ -27,3 +27,6 @@ class ProductPage(BasePage):
         price = self.find_list_of_elements(*ProductPageLocators.ITEM_ADDED_ALERT)[2].text
         assert reference in price, "Цена не совпадает с необходимой."
 
+
+
+

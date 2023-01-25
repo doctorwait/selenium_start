@@ -23,3 +23,7 @@ class ForDisappearPageLocators:
     ADD_TO_CART_BUTTON = (By.CLASS_NAME, 'btn-add-to-basket')
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success:nth-child(1)')
 
+
+class BasePageLocators:
+    LOGIN_LINK = (By.ID, "login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
