@@ -18,3 +18,8 @@ class ProductPageLocators:
     CURRENT_ITEM_NAME = (By.CSS_SELECTOR, '.product_main > h1')
     CURRENT_ITEM_PRICE = (By.CSS_SELECTOR, '.product_main .price_color')
 
+
+class ForDisappearPageLocators:
+    ADD_TO_CART_BUTTON = (By.CLASS_NAME, 'btn-add-to-basket')
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, '.alert-success:nth-child(1)')
+

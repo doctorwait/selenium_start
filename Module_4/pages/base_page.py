@@ -28,24 +28,24 @@ class BasePage:
     def find_list_of_elements(self, by, value):
         return self.driver.find_elements(by=by, value=value)
 
-    def is_not_element_present(self, how, what, timeout=4):
+    def is_not_element_present(self, by, value, timeout=4):
         """
         Проверяет, что элемент не появляется на странице в течение заданного времени. Упадет, как только увидит искомый
         элемент. Не появился: успех, тест зеленый.
         """
         try:
-            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((by, value)))
         except TimeoutException:
             return True
         return False
 
-    def is_disappeared(self, how, what, timeout=4):
+    def is_disappeared(self, by, value, timeout=4):
         """
         Когда мы хотим проверить, что какой-то элемент исчезает. Будет ждать до тех пор, пока элемент не исчезнет.
         """
         try:
             WebDriverWait(self.driver, timeout, 1, (TimeoutException, )).until_not(
-                EC.presence_of_element_located((how, what)))
+                EC.presence_of_element_located((by, value)))
         except TimeoutException:
             return False
 
