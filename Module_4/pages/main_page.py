@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 
 
 class MainPage(BasePage):
-    def __init__(self):
-        super().__init__(self.driver, self.url)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     # Deprecated
     """

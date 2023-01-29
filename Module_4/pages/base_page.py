@@ -56,6 +56,10 @@ class BasePage:
         link = self.driver.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
+    def go_to_basket_page(self):
+        button = self.driver.find_element(*BasePageLocators.GO_TO_BASKET_BUTTON)
+        button.click()
+
     def should_be_login_link(self):
         assert self.is_one_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 

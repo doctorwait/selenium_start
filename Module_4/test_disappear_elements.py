@@ -2,7 +2,6 @@ from .pages.for_disappear_page import ForDisappearPage
 from .pages.locators import ForDisappearPageLocators
 import pytest
 
-
 link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 
 

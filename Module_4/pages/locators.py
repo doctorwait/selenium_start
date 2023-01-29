@@ -27,3 +27,11 @@ class ForDisappearPageLocators:
 class BasePageLocators:
     LOGIN_LINK = (By.ID, "login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    GO_TO_BASKET_BUTTON = (By.CSS_SELECTOR, '.btn-group>a')
+
+
+class BasketPageLocators:
+    ITEM_PRESENTED_IN_BASKET = (By.CLASS_NAME, 'basket_summary')
+    TEXT_ABOUT_BASKET_EMPTINESS = (By.CSS_SELECTOR, '#content_inner > p')
+
+
