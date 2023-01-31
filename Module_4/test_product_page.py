@@ -1,5 +1,8 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
+from .pages.for_disappear_page import ForDisappearPage
+from .pages.locators import ForDisappearPageLocators
+from .pages.login_page import LoginPage
 
 import pytest
 import time
@@ -15,6 +18,35 @@ promo_links = ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_2
                             marks=pytest.mark.xfail),
                "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
                "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"]
+
+
+class TestUserAddToBasketFromProductPage:
+    @pytest.fixture(scope='function', autouse=True)
+    def setup_class(self, driver):
+        link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        page = LoginPage(driver, link)
+        page.open()
+        page.register_new_user(email=str(time.time()) + "@fakemail.org", password='123qwerty!')
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, driver):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+        page = ForDisappearPage(driver, link)
+        page.open()
+        is_message_present = page.is_not_element_present(*ForDisappearPageLocators.SUCCESS_MESSAGE)
+        assert is_message_present, 'Сообщение об успешном добавлении товара в корзину появилось, хотя кнопку не нажимали.'
+
+    def test_user_can_add_product_to_basket(self, driver):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
+        # link2 = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
+        page = ProductPage(driver, link)
+        page.open()
+        page.add_to_cart()
+        page.solve_quiz_and_get_code()
+        page.is_alerts_presented()
+        page.particular_item_was_added()
+        # time.sleep(600)
+        page.price_verifier()
 
 
 @pytest.mark.parametrize('link', promo_links)

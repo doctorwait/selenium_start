@@ -18,7 +18,7 @@ class ProductPage(BasePage):
         assert len(list_of_alerts) > 0, "Сообщений о добавлении товара нет."
 
     def particular_item_was_added(self):
-        reference = self.driver.find_element(*ProductPageLocators.CURRENT_ITEM_NAME).text + ' has been added to your basket.'
+        reference = self.driver.find_element(*ProductPageLocators.CURRENT_ITEM_NAME).text.strip() + ' has been added to your basket.'
         text = self.find_list_of_elements(*ProductPageLocators.ITEM_ADDED_ALERT)[0].text
         assert reference == text, "В корзину был добавлен не тот товар."
 
