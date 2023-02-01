@@ -9,16 +9,16 @@ class LoginPage(BasePage):
         self.should_be_register_form()
 
     def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
         assert 'login' in self.driver.current_url
-        assert self.url == 'http://selenium1py.pythonanywhere.com/en-gb/accounts/login/', 'Неверный URL формы логина'
+        ordinary_url = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        # Сравним в отдельности две части строки, чтобы избежать конфликтов с локалью и http / http(s)
+        assert self.url.split('/')[2] == ordinary_url.split('/')[2] and '/'.join(self.url.split('/')[4:]) == '/'.join(
+            ordinary_url.split('/')[4:]), 'Неверный URL формы логина'
 
     def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
         assert self.is_one_element_present(*LoginPageLocators.LOGIN_FORM), 'Нет формы авторизации'
 
     def should_be_register_form(self):
-        # реализуйте проверку, что есть форма регистрации на странице
         assert self.is_one_element_present(*LoginPageLocators.REGISTER_FORM), 'Нет формы регистрации'
 
     def register_new_user(self, email, password):

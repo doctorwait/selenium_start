@@ -1,7 +1,6 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
 from .pages.for_disappear_page import ForDisappearPage
-from .pages.locators import ForDisappearPageLocators
 from .pages.login_page import LoginPage
 
 import pytest
@@ -33,36 +32,30 @@ class TestUserAddToBasketFromProductPage:
         link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
         page = ForDisappearPage(driver, link)
         page.open()
-        is_message_present = page.is_not_element_present(*ForDisappearPageLocators.SUCCESS_MESSAGE)
-        assert is_message_present, 'Сообщение об успешном добавлении товара в корзину появилось, хотя кнопку не нажимали.'
+        page.user_cant_see_success_message(
+            'Сообщение об успешном добавлении товара в корзину появилось, хотя кнопку не нажимали.')
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, driver):
-        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
-        # link2 = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/'
         page = ProductPage(driver, link)
         page.open()
         page.add_to_cart()
-        page.solve_quiz_and_get_code()
         page.is_alerts_presented()
         page.particular_item_was_added()
-        # time.sleep(600)
         page.price_verifier()
 
 
+@pytest.mark.need_review
 @pytest.mark.parametrize('link', promo_links)
 def test_guest_can_add_product_to_basket(driver, link):
-    # link = 'http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear'
-    # link2 = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019'
     page = ProductPage(driver, link)
     page.open()
     page.add_to_cart()
     page.solve_quiz_and_get_code()
     page.is_alerts_presented()
     page.particular_item_was_added()
-    # time.sleep(600)
     page.price_verifier()
-
-# @pytest.mark.parametrize('link', ["okay_link", pytest.param("bugged_link", marks=pytest.mark.xfail), "okay_link"])
 
 
 def test_guest_should_see_login_link_on_product_page(driver):
@@ -72,6 +65,7 @@ def test_guest_should_see_login_link_on_product_page(driver):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(driver):
     link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/'
     page = ProductPage(driver, link)
@@ -79,6 +73,7 @@ def test_guest_can_go_to_login_page_from_product_page(driver):
     page.go_to_login_page()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(driver):
     link = 'https://selenium1py.pythonanywhere.com/ru/catalogue/the-girl-who-played-with-non-fire_203/'
     page = ProductPage(driver, link)

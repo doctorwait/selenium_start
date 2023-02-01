@@ -16,7 +16,6 @@ class LoginPageLocators:
     REGISTER_FINISH_BUTTON = (By.NAME, 'registration_submit')
 
 
-
 class ProductPageLocators:
     ADD_TO_CART_BUTTON = (By.CLASS_NAME, 'btn-add-to-basket')
     ITEM_ADDED_ALERT = (By.CLASS_NAME, 'alertinner')

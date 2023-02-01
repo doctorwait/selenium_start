@@ -1,23 +1,7 @@
 from .base_page import BasePage
-from .locators import MainPageLocators
-from .login_page import LoginPage
-
-from selenium.webdriver.common.by import By
 
 
 class MainPage(BasePage):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    # Deprecated
-    """
-    def go_to_login_page(self):
-        login_link = self.driver.find_element(*MainPageLocators.LOGIN_LINK)
-        login_link.click()
-        # При создании объекта мы обязательно передаем ему тот же самый объект драйвера для работы с браузером,
-        # а в качестве url передаем текущий адрес!!!
-        # return LoginPage(browser=self.driver, url=self.driver.current_url)
-
-    def should_be_login_link(self):
-        assert self.is_one_element_present(*MainPageLocators.LOGIN_LINK), "Login link is not presented"
-    """
